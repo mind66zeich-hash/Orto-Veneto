@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Orto Veneto</title>
+<meta name="theme-color" content="#2f7d32">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div>
+      <p class="eyebrow">Pieve di Soligo (TV) · 45.90 N · 12.17 E</p>
+      <h1>Orto Veneto</h1>
+      <p class="lead" id="lead">Carico il meteo...</p>
+    </div>
+    <button type="button" class="btn" id="refresh">Aggiorna</button>
+  </header>
+  <p class="diag" id="diag" role="status"></p>
+
+  <nav class="tabs" role="tablist" aria-label="Sezioni">
+    <button type="button" role="tab" id="tb-oggi" aria-selected="true">Oggi</button>
+    <button type="button" role="tab" id="tb-semina" aria-selected="false">Semina</button>
+    <button type="button" role="tab" id="tb-irrigazione" aria-selected="false">Acqua</button>
+    <button type="button" role="tab" id="tb-orto" aria-selected="false">Il mio orto</button>
+    <button type="button" role="tab" id="tb-luna" aria-selected="false">Luna</button>
+  </nav>
+
+  <section id="t-oggi" role="tabpanel">
+    <div id="alerts"></div>
+    <div class="panel"><h2>Da fare oggi</h2><div id="todo"></div></div>
+    <div class="stats" id="stats"></div>
+    <div class="panel"><h2>Pioggia caduta e prevista</h2><div id="raincht"></div></div>
+  </section>
+
+  <section id="t-semina" role="tabpanel" hidden>
+    <div class="panel">
+      <h2>Quando seminare e trapiantare</h2>
+      <div class="days" id="sdays"></div>
+      <div id="sinfo"></div>
+      <div class="filters">
+        <div class="seg" aria-label="Operazione"><button type="button" id="so-tutto" aria-pressed="true">Tutto</button><button type="button" id="so-semina" aria-pressed="false">Semina</button><button type="button" id="so-trapianto" aria-pressed="false">Trapianto</button></div>
+        <div class="seg" aria-label="Dove"><button type="button" id="sp-tutti" aria-pressed="true">Ovunque</button><button type="button" id="sp-aperto" aria-pressed="false">Aperto</button><button type="button" id="sp-serra" aria-pressed="false">Serra</button></div>
+      </div>
+      <input type="search" id="s-q" placeholder="Cerca ortaggio..." aria-label="Cerca ortaggio">
+    </div>
+    <div id="slist"></div>
+  </section>
+
+  <section id="t-irrigazione" role="tabpanel" hidden>
+    <div class="panel">
+      <h2>Irrigazione</h2>
+      <p class="note">Bilancio idrico giornaliero (metodo FAO-56): pioggia caduta e prevista contro l'acqua che ogni ortaggio consuma. Tocca un ortaggio per il dettaglio.</p>
+      <div class="setrow">
+        <label for="set-soil">Il tuo terreno</label>
+        <select id="set-soil"><option value="sabbioso">Sabbioso (drena in fretta)</option><option value="medio">Medio impasto</option><option value="argilloso">Argilloso (trattiene acqua)</option></select>
+        <label for="set-method">Come irrighi</label>
+        <select id="set-method"><option value="goccia">Goccia</option><option value="tubo">Tubo o annaffiatoio</option><option value="aspersione">Aspersione</option></select>
+      </div>
+      <input type="search" id="i-q" placeholder="Cerca ortaggio..." aria-label="Cerca ortaggio">
+    </div>
+    <div id="ilist"></div>
+  </section>
+
+  <section id="t-orto" role="tabpanel" hidden>
+    <div class="panel">
+      <h2>Aggiungi una coltura</h2>
+      <label for="f-veg">Ortaggio</label><select id="f-veg"></select>
+      <label for="f-place">Dove</label><select id="f-place"><option value="aperto">All'aperto</option><option value="serra">In serra o tunnel</option></select>
+      <label for="f-mode">Cosa hai fatto</label><select id="f-mode"><option value="semina">Seminato</option><option value="trapianto">Trapiantato</option></select>
+      <label for="f-date">Data</label><input type="date" id="f-date">
+      <div class="actions"><button type="button" class="btn" id="f-add">Aggiungi</button> <span class="dim" id="f-msg" role="status"></span></div>
+    </div>
+    <div id="mylist"></div>
+  </section>
+
+  <section id="t-luna" role="tabpanel" hidden>
+    <div class="panel" id="moonnow"></div>
+    <div class="panel"><h2>Prossimi 30 giorni</h2><div class="mgrid" id="moongrid"></div>
+      <p class="legend"><span><i style="background:var(--ok-bg)"></i>crescente</span><span><i style="background:var(--rain-bg)"></i>calante</span><span><i style="background:var(--bad-bg)"></i>luna nuova o piena (riposo)</span><span>↑ ascendente ↓ discendente</span></p>
+    </div>
+    <p class="note">Le indicazioni lunari seguono la tradizione contadina: non hanno una dimostrazione scientifica e nel calcolo pesano poco. Contano di più temperatura, gelo e pioggia.</p>
+  </section>
+
+  <p class="foot" id="foot">Calendari di semina e schede: ortodacoltivare.it. Meteo e umidità del terreno: Open-Meteo (modelli ECMWF, ICON, GFS). Fabbisogni idrici: metodo FAO-56. Le soglie di temperatura sono stime: adattale all'esperienza del tuo orto.</p>
+</main>
+<script src="ortaggi.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
